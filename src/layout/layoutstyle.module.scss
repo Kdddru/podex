@@ -1,0 +1,37 @@
+.layout{
+  position: relative;
+  
+  
+  .main{
+    width: 90%;
+    margin: auto;
+    margin-top: 3%;
+    border: 2px solid black;
+    border-radius: 10px;
+    height: 84vh;
+    padding: 2%;
+    display: flex;
+    gap: 5%;
+  }
+}
+
+.card{
+  display: flex;
+  border: 1px solid black;
+  padding: 10px;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 260px;
+  cursor: pointer;
+
+
+  span{
+    width: 30%;
+    min-width: 55px;
+  }
+
+  .type{
+    display: flex;
+    gap: 10px;
+  }
+}

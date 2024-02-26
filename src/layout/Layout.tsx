@@ -11,7 +11,7 @@ export interface Pokemon{
 
 
 function Main(){
-  const num = 2;
+  const num = 10;
 
   const [pokemons, setPokemons] = useState<Pokemon[]|undefined>();
   
@@ -46,18 +46,24 @@ function Main(){
       urls.push(url);
     }
 
+    
     const promise = urls.map(async(url)=>await fetch(url));
+    //포켓몬 전체 데이터
     const data = await Promise.all(promise)
     .then((response)=>Promise.all(response.map((res)=>res.json())))
     .then((result)=>(result))
+    
+    //데이터 들고오는 함수
+    async function fetchData(url:string){
+      const data = await fetch(url).then((res)=>res.json()).then((result)=>result)
+
+      return data      
+    }
 
     const fetchTypeUrls = data.map(({ types })=>
-    types?.map(({ type:{ url } }:any)=>fetch(url)));
+    types?.map(({ type:{ url } }:any)=>fetchData(url)));
 
-
-    const KoreanTypeNames = await Promise.all(fetchTypeUrls)
-
-    console.log(KoreanTypeNames);
+    console.log(fetchTypeUrls);
   } 
 
   useEffect(()=>{

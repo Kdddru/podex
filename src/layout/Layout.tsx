@@ -11,10 +11,10 @@ export interface Pokemon {
 
 
 function Main() {
-  const num = 10;
+  const [num, setNum] = useState<number>(10);
 
   const [pokemons, setPokemons] = useState<Pokemon[] | undefined>();
-  const [pokeTypes ,setPokeTypes] = useState<any | undefined>();
+  const [pokeTypes ,setPokeTypes] = useState<any[] | undefined>();
 
   async function getData() {
     const urls = []
@@ -39,7 +39,7 @@ function Main() {
 
   }
 
-  // 기본 포켓몬 데이터 들고오기
+  //기본 포켓몬 데이터 들고오기
   async function getBasicData() {
     const urls = []
 
@@ -71,10 +71,12 @@ function Main() {
       return typeName
     })
     
+    //최종 타입 한글 들고오기
     const typeKoreanName = await Promise.all(types)
 
-    console.log(typeKoreanName)
+    setPokeTypes(typeKoreanName);
   }
+
 
   useEffect(() => {
     getData()
@@ -84,7 +86,7 @@ function Main() {
   return (
     <div className={style.main}>
       <IndexPage pokemons={pokemons} />
-      <Outlet />
+      <Outlet context={pokemons}/>
     </div>
   )
 }

@@ -1,12 +1,18 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import style from './component.module.scss'
-import { useParams } from 'react-router-dom'
+import { useOutletContext, useParams } from 'react-router-dom'
 
 
 export default function InfoPage() {
   const param = useParams();
 
   const {id} = param
+  const props:any[] | undefined = useOutletContext();
+
+  if(props){
+    const pokemon = props.filter((i)=>i?.id == id)
+    console.log(pokemon)
+  }
 
 
   return (

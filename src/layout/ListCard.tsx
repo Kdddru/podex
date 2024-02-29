@@ -1,7 +1,8 @@
 import React from 'react'
 import style from './layoutstyle.module.scss'
 import { useNavigate } from 'react-router-dom';
-import { Pokemon } from '../components/IndexPage';
+import { Pokemon } from './Layout';
+
 
 
 

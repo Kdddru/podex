@@ -11,7 +11,6 @@ export default function InfoPage() {
 
   if(props){
     const pokemon = props.filter((i)=>i?.id == id)
-    console.log(pokemon)
   }
 
 

@@ -13,7 +13,7 @@ export default function ListCard(props:Pokemon) {
   return (
     <div className={style.card} onClick={()=>{navi(`/pokemon/${id}`)}}>
       <h4>{id}</h4>
-      <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`} width={60} alt="이미지" />
+      <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`} width={50} alt="이미지" />
       <span>{name}</span>
       <ul className={style.type}>
         {

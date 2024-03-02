@@ -4,8 +4,9 @@
   
   .main{
     width: 90%;
+    max-width: 1200px;
     margin: auto;
-    margin-top: 3%;
+    margin-top: 1.5%;
     border: 2px solid black;
     border-radius: 10px;
     height: 84vh;
@@ -17,17 +18,17 @@
 
 .card{
   display: flex;
-  border: 1px solid black;
+  gap: 30px;
   padding: 10px;
+  border: 2px solid black;
   align-items: center;
-  justify-content: space-between;
-  min-width: 260px;
+  justify-content: space-evenly;
+  width: 370px;
   cursor: pointer;
 
 
   span{
-    width: 30%;
-    min-width: 55px;
+    width: 20%;
   }
 
   .type{
@@ -36,5 +37,12 @@
     gap: 10px;
     width: 25%;
     min-width: 75px;
+
+    li{
+      min-width: 50px;
+      padding: 5px;
+      font-size: 0.9rem;
+      color: white;
+    }
   }
 }

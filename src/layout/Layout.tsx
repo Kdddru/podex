@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import style from './layoutstyle.module.scss'
 import Navbar from '../components/Navbar'
 import IndexPage from '../components/IndexPage'
@@ -15,15 +15,16 @@ export interface Pokemon extends PokeNamesType{
 
 
 function Main() {
-  const [num, setNum] = useState<number>(11);
+  const [num, setNum] = useState<number>(20);
   const [pokemons, setPokemons] = useState<Pokemon[] | undefined>();
   const [pokeNames, setPokeNames] = useState<string[] | undefined>();
   const [pokeTypes ,setPokeTypes] = useState<string[][] | undefined>();
 
+
   //포켓몬 이름 데이터 들고오기
-  async function getPokemonName(n:number) {
+    const getPokemonName = useCallback(async(n:number)=>{
     const urls = []
-    for (let i = 0; i < num; i++) {
+    for (let i = 0; i < n; i++) {
       let url = `https://pokeapi.co/api/v2/pokemon-species/${i + 1}`
       urls.push(url);
     };
@@ -38,11 +39,11 @@ function Main() {
       }));
 
       setPokeNames(pokemNames);
+  },[num])
 
-  }
 
   //타입 한글 들고오기
-  async function getType(prop:any[]){
+  const getType = useCallback(async(prop:any[])=>{
     //타입 url 전부 들고오기
     const typeUrls = prop.map(({ types }) =>
     types?.map(({type}: any) => type.url)
@@ -63,12 +64,10 @@ function Main() {
     const typeKoreanName = await Promise.all(types);
     
     setPokeTypes(typeKoreanName);
-    
-  }
-  
+  },[num])
 
   //기본 포켓몬 데이터 들고오기
-  async function getData(n:number) {
+  const getData = useCallback(async(n:number)=>{
     const urls = []
 
     for (let i = 0; i < n; i++) {
@@ -84,16 +83,18 @@ function Main() {
       .then((result) => (result));
     
     //포켓몬 한글이름 
-    getPokemonName(n);
     //포켓몬 타입 한글 이름
     getType(data);
-  }
-
+  },[])
+  
 
   //실행시 데이터 들고오기
   useEffect(() => {
+    getPokemonName(num);
     getData(num);
   }, [num])
+
+  
   
   //포켓몬 이름, 타입값들이 다 존재하면 최종 데이터 만들기
   useEffect(()=>{

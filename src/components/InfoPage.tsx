@@ -7,18 +7,17 @@ import { Pokemon } from '../layout/Layout';
 export default function InfoPage() {
   const {id} = useParams();
   const props:Pokemon[] | undefined = useOutletContext();
-  const random = Math.random();
 
   const [pokemon, setPokemon] = useState<Pokemon | undefined>();
-  const [number, setNumber] = useState<number | undefined>();
 
-  const data = props?.find((prop)=>prop?.id == Number(id));
   
+  const data = props?.find((prop)=>prop?.id == Number(id));
+
   useEffect(()=>{
     if(props){
       setPokemon(data);
     }
-  },[id,random])
+  },[id])
 
 
   return (
@@ -27,7 +26,7 @@ export default function InfoPage() {
         pokemon && 
         <div>
           <h2>{pokemon.id}</h2>
-          <img src={`https://data1.pokemonkorea.co.kr/newdata/pokedex/mid/000${id}01.png`} width={200} alt="이미지" />
+          <img src={`https://data1.pokemonkorea.co.kr/newdata/pokedex/mid/${Number(id)< 10? '000': Number(id)<100 ? '00': '0'}${id}01.png`} width={200} alt="이미지" />
           <h2>{pokemon.name}</h2>
           <ul>
             {pokemon.type?.map((t,i)=>

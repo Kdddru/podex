@@ -4,6 +4,7 @@ import Layout from './layout/Layout';
 import InfoPage from './components/InfoPage';
 import './pokeTypeCss/type.css'
 
+
 function App() {
 
   return (

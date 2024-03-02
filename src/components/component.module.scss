@@ -3,6 +3,7 @@
   background-color: tomato;
   border-bottom: 3px solid black;
   height: 10vh;
+  min-width: 1140px;
 
   .circle {
     position: absolute;
@@ -28,7 +29,7 @@
 
 .index {
   width: 40%;
-  min-width: 240px;
+  min-width: 390px;
   border: 2px solid black;
 
 
@@ -51,7 +52,8 @@
 }
 
 .info {
-  width: 60%;
+  width: 55%;
+  min-width: 590px;
   border: 2px solid black;
 
   div {

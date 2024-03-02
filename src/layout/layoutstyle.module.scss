@@ -5,6 +5,7 @@
   .main{
     width: 90%;
     max-width: 1200px;
+    min-width: 1120px;
     margin: auto;
     margin-top: 1.5%;
     border: 2px solid black;
@@ -18,17 +19,16 @@
 
 .card{
   display: flex;
-  gap: 30px;
-  padding: 10px;
-  border: 2px solid black;
+  padding: 5px;
   align-items: center;
   justify-content: space-evenly;
-  width: 370px;
+  min-width: 360px;
   cursor: pointer;
 
 
   span{
     width: 20%;
+    min-width: 70px;
   }
 
   .type{

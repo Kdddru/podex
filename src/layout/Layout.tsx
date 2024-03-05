@@ -39,60 +39,45 @@ function Main() {
       }));
 
     setPokeNames(pokemNames);
-  }, [])
+  }, [num])
+  
 
+  const getType = useCallback(async(n:number)=>{
+    const urls = []
 
-  //타입 한글 들고오기
-  const getType = useCallback(async (prop: any[]) => {
-    //타입 url 전부 들고오기
-    const typeUrls = prop.map(({ types }) =>
-      types?.map(({ type }: any) => type.url)
-    )
+    for (let i = 0; i < n; i++) {
+      let url = `https://pokeapi.co/api/v2/pokemon-form/${i + 1}`
+      urls.push(url);
+    }
 
-    // 타입 한글 이름 들고오기
-    const types = typeUrls.map(async (arr) => {
-      const url = arr.map((urls: string) => fetch(urls));
+    const promise = urls.map((url)=> fetch(url));
 
-      const typeName = await Promise.all(url)
-        .then((response) => Promise.all(response.map((res) => res.json())))
-        .then((result) => result.map((r) => r?.names[1].name))
+    const data = await Promise.all(promise)
+    .then((response)=>Promise.all(response.map((res)=>res.json())))
+    .then((result)=>result.map((r)=>r?.types));
+
+    const typeUrls = data.map((urls)=>urls.map((url:any)=>url.type.url)); 
+
+    const types = typeUrls.map(async(urls)=>{
+      const typePromise = urls?.map((url:any)=>fetch(url));
+
+      const typeName =  Promise.all(typePromise)
+      .then((response)=>Promise.all(response.map((res)=>res.json())))
+      .then((result)=>result.map((r)=>r.names[1].name))
 
       return typeName
     })
 
-    //최종 타입 한글 들고오기
-    const typeKoreanName = await Promise.all(types);
+    const typeKoreanName = await Promise.all(types)
 
     setPokeTypes(typeKoreanName);
-  }, [])
-
-  
-  //기본 포켓몬 데이터 들고오기
-  const getData = useCallback(async(n: number) => {
-    const urls = []
-
-    for (let i = 0; i < n; i++) {
-      let url = `https://pokeapi.co/api/v2/pokemon/${i + 1}`
-      urls.push(url);
-    }
-
-    const promise = urls.map(async (url) => await fetch(url));
-
-    //포켓몬 전체 데이터
-    const data = await Promise.all(promise)
-      .then((response) => Promise.all(response.map((res) => res.json())))
-      .then((result) => (result));
-
-    //포켓몬 한글이름 
-    //포켓몬 타입 한글 이름
-    getType(data);
-  }, [])
+  },[num])
 
 
   //실행시 데이터 들고오기
   useEffect(() => {
     getPokemonName(num);
-    getData(num);
+    getType(num);
   }, [num])
 
 
@@ -111,7 +96,10 @@ function Main() {
 
   return (
     <div className={style.main}>
-      <IndexPage pokemons={pokemons} />
+      {
+        pokeNames && pokeTypes && 
+        <IndexPage pokemons={pokemons} setNum={setNum}/>
+      }
       <Outlet context={pokemons} />
     </div>
   )

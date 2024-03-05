@@ -1,8 +1,8 @@
-.layout{
+.layout {
   position: relative;
-  
-  
-  .main{
+
+
+  .main {
     width: 90%;
     max-width: 1200px;
     min-width: 1120px;
@@ -17,34 +17,34 @@
   }
 }
 
-.card{
+.card {
   display: flex;
   padding: 10px;
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
 
-  &:hover{
-    border: 1px solid black;
+  &:hover {
     opacity: 0.7;
   }
 
 
-  span{
-    width: 10%;
-    min-width: 70px;
+  span {
+    width: 20%;
+    font-size: 0.8rem;
+
   }
 
-  .type{
+  .type {
     display: flex;
     justify-content: space-around;
     gap: 15px;
-    width: 25%;
+    width: 30%;
     min-width: 75px;
 
-    li{
+    li {
       border-radius: 5px;
-      width: 45px;
+      width: 60px;
       padding: 5px;
       font-size: 0.7rem;
       color: white;

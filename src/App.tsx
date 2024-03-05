@@ -10,8 +10,8 @@ function App() {
   return (
     <div>
       <Routes>
-        <Route path='/' element={<Layout/>}>
-          <Route path='/pokemon/:id' element={<InfoPage/>} />
+        <Route path='/' element={<Layout />}>
+          <Route path='/pokemon/:id' element={<InfoPage />} />
         </Route>
       </Routes>
     </div>

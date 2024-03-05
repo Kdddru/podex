@@ -15,7 +15,7 @@ export interface Pokemon extends PokeNamesType {
 
 
 function Main() {
-  const [num, setNum] = useState<number>(11);
+  const [num, setNum] = useState<number>(21);
   const [pokemons, setPokemons] = useState<Pokemon[] | undefined>();
   const [pokeNames, setPokeNames] = useState<string[] | undefined>();
   const [pokeTypes, setPokeTypes] = useState<string[][] | undefined>();
@@ -40,9 +40,9 @@ function Main() {
 
     setPokeNames(pokemNames);
   }, [num])
-  
 
-  const getType = useCallback(async(n:number)=>{
+
+  const getType = useCallback(async (n: number) => {
     const urls = []
 
     for (let i = 0; i < n; i++) {
@@ -50,20 +50,20 @@ function Main() {
       urls.push(url);
     }
 
-    const promise = urls.map((url)=> fetch(url));
+    const promise = urls.map((url) => fetch(url));
 
     const data = await Promise.all(promise)
-    .then((response)=>Promise.all(response.map((res)=>res.json())))
-    .then((result)=>result.map((r)=>r?.types));
+      .then((response) => Promise.all(response.map((res) => res.json())))
+      .then((result) => result.map((r) => r?.types));
 
-    const typeUrls = data.map((urls)=>urls.map((url:any)=>url.type.url)); 
+    const typeUrls = data.map((urls) => urls.map((url: any) => url.type.url));
 
-    const types = typeUrls.map(async(urls)=>{
-      const typePromise = urls?.map((url:any)=>fetch(url));
+    const types = typeUrls.map(async (urls) => {
+      const typePromise = urls?.map((url: any) => fetch(url));
 
-      const typeName =  Promise.all(typePromise)
-      .then((response)=>Promise.all(response.map((res)=>res.json())))
-      .then((result)=>result.map((r)=>r.names[1].name))
+      const typeName = Promise.all(typePromise)
+        .then((response) => Promise.all(response.map((res) => res.json())))
+        .then((result) => result.map((r) => r.names[1].name))
 
       return typeName
     })
@@ -71,7 +71,7 @@ function Main() {
     const typeKoreanName = await Promise.all(types)
 
     setPokeTypes(typeKoreanName);
-  },[num])
+  }, [num])
 
 
   //실행시 데이터 들고오기
@@ -97,8 +97,8 @@ function Main() {
   return (
     <div className={style.main}>
       {
-        pokeNames && pokeTypes && 
-        <IndexPage pokemons={pokemons} setNum={setNum}/>
+        pokeNames && pokeTypes &&
+        <IndexPage pokemons={pokemons} setNum={setNum} />
       }
       <Outlet context={pokemons} />
     </div>

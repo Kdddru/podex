@@ -5,46 +5,45 @@ import { Pokemon } from '../layout/Layout'
 
 
 type PropsType = {
-  pokemons : Pokemon[] | undefined
-  setNum : React.Dispatch<React.SetStateAction<number>>
+  pokemons: Pokemon[] | undefined
+  setNum: React.Dispatch<React.SetStateAction<number>>
 }
 
-export default function IndexPage(props:PropsType) {
+export default function IndexPage(props: PropsType) {
   const cardbox = document.querySelector('#cardbox');
 
-  const { pokemons,setNum } = props
-  
-  const scrollHandle = useCallback(()=>{
-      if(cardbox){
-        const {scrollHeight,clientHeight, scrollTop} = cardbox
+  const { pokemons, setNum } = props
 
-        if(scrollHeight-clientHeight-scrollTop === 0){
-          setNum((prev)=> {
-            if(prev>141){
-              return prev
-            }
-            return prev+10
+  const scrollHandle = useCallback(() => {
+    if (cardbox) {
+      const { scrollHeight, clientHeight, scrollTop } = cardbox
+
+      if (scrollHeight - clientHeight - scrollTop < 1) {
+        setNum((prev) => {
+          if (prev > 141) {
+            return prev
           }
-          );
+          return prev + 10
         }
+        );
       }
+    }
 
-  },[cardbox])
+  }, [cardbox])
 
-  useEffect(()=>{
-      cardbox?.addEventListener('scroll',scrollHandle);
-  },[cardbox])
+  cardbox?.addEventListener('scroll', scrollHandle);
+
 
 
   return (
     <div className={style.index}>
       <div className={style.search}>
-        
+
       </div>
       <div className={style.cardbox} id='cardbox'>
         {
-          pokemons && 
-          pokemons.map((pokemon,i)=><ListCard key={i} {...pokemon}/>)
+          pokemons &&
+          pokemons.map((pokemon, i) => <ListCard key={i} {...pokemon} />)
         }
       </div>
     </div>

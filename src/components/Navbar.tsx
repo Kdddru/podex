@@ -4,7 +4,7 @@ import style from './component.module.scss'
 export default function Navbar() {
   return (
     <div className={style.navbar}>
-      <div className={style.circle}/>
+      <div className={style.circle} />
     </div>
   )
 }

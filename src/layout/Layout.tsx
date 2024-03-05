@@ -15,7 +15,7 @@ export interface Pokemon extends PokeNamesType {
 
 
 function Main() {
-  const [num, setNum] = useState<number>(20);
+  const [num, setNum] = useState<number>(11);
   const [pokemons, setPokemons] = useState<Pokemon[] | undefined>();
   const [pokeNames, setPokeNames] = useState<string[] | undefined>();
   const [pokeTypes, setPokeTypes] = useState<string[][] | undefined>();

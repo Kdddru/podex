@@ -18,7 +18,7 @@ export default function IndexPage(props:PropsType) {
       if(cardbox){
         const {scrollHeight,clientHeight, scrollTop} = cardbox
 
-        if(scrollHeight-clientHeight-scrollTop < 10){
+        if(scrollHeight-clientHeight-scrollTop === 0){
           setNum((prev)=> {
             if(prev>141){
               return prev

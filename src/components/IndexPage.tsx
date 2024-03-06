@@ -1,7 +1,9 @@
 import React, { useCallback, useEffect } from 'react'
 import style from './component.module.scss'
-import ListCard from '../layout/ListCard'
+//import ListCard from '../layout/ListCard'
 import { Pokemon } from '../layout/Layout'
+
+const ListCard = React.lazy(()=>import('../layout/ListCard'))
 
 
 type PropsType = {
@@ -18,7 +20,7 @@ export default function IndexPage(props: PropsType) {
     if (cardbox) {
       const { scrollHeight, clientHeight, scrollTop } = cardbox
 
-      if (scrollHeight - clientHeight - scrollTop < 1) {
+      if (scrollHeight - clientHeight - scrollTop < 5) {
         setNum((prev) => {
           if (prev > 141) {
             return prev

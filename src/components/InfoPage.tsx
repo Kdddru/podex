@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import style from './component.module.scss'
-import { useNavigate, useOutletContext, useParams } from 'react-router-dom'
+import { useOutletContext, useParams } from 'react-router-dom'
 import { Pokemon } from '../layout/Layout';
 
 
@@ -21,7 +21,6 @@ export default function InfoPage() {
   const [pokeAbility, setPokeAbility] = useState<string[] | undefined>()
 
   const { id } = useParams();
-  const navi = useNavigate();
   const props: Pokemon[] | undefined = useOutletContext();
 
   const data = props?.find((prop) => prop?.id == Number(id));

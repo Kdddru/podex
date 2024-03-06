@@ -1,8 +1,9 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import style from './layoutstyle.module.scss'
 import Navbar from '../components/Navbar'
-import IndexPage from '../components/IndexPage'
 import { Outlet } from 'react-router-dom'
+
+const IndexPage = React.lazy(()=>import('../components/IndexPage'));
 
 export interface PokeNamesType {
   id: number | undefined

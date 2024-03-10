@@ -83,7 +83,7 @@ export default function InfoPage() {
         pokeInfo && data && pokeAbility &&
         <div>
           <h2>NO. {data.id}</h2>
-          <img src={`https://data1.pokemonkorea.co.kr/newdata/pokedex/mid/${Number(id) < 10 ? '000' : Number(id) < 100 ? '00' : '0'}${id}01.png`} width={150} alt="이미지" />
+          <img loading='lazy' src={`https://data1.pokemonkorea.co.kr/newdata/pokedex/mid/${Number(id) < 10 ? '000' : Number(id) < 100 ? '00' : '0'}${id}01.png`} width={150} alt="이미지" />
           <h2>{data.name}</h2>
           <ul className={style.type}>
             {data.type?.map((t, i) =>

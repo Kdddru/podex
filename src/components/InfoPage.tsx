@@ -23,7 +23,7 @@ export default function InfoPage() {
   const { id } = useParams();
   const props: Pokemon[] | undefined = useOutletContext();
 
-  const data = props?.find((prop) => prop?.id == Number(id));
+  const data = props?.find((prop) => prop?.id === Number(id));
 
   //포켓몬 정보 url
   let url = `https://pokeapi.co/api/v2/pokemon/${id}`

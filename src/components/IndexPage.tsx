@@ -1,9 +1,8 @@
-import React, { useCallback, useEffect } from 'react'
+import React, { useCallback } from 'react'
 import style from './component.module.scss'
-//import ListCard from '../layout/ListCard'
+import ListCard from '../layout/ListCard'
 import { Pokemon } from '../layout/Layout'
 
-const ListCard = React.lazy(()=>import('../layout/ListCard'))
 
 
 type PropsType = {

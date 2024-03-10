@@ -83,7 +83,7 @@ export default function InfoPage() {
             {data.type?.map((t, i) =>
               <li className={`${t}`} key={i}>{t}</li>)}
           </ul>
-          <ul>
+          <ul className={style.heiwei}>
             <li>
               <p>키</p>
               <p>{pokeInfo.height}</p>

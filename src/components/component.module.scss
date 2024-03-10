@@ -110,6 +110,18 @@
       }
     }
 
+    .heiwei{
+        li{
+          padding: 0;
+          p{
+            &:nth-child(1){
+              border-bottom: 2px solid black;
+            }
+          }
+          
+        }
+    }
+
     .ability {
       display: block;
 

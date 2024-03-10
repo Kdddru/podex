@@ -15,25 +15,49 @@ type AbilitiesType = {
   slot: number
 }
 
+async function fetchData(u:string) {
+  const info = await fetch(u).then((res) => res.json());
+
+  return info
+}
+
 
 export default function InfoPage() {
   const [pokeInfo, setPokeInfo] = useState<any | undefined>();
   const [pokeAbility, setPokeAbility] = useState<string[] | undefined>()
-
+  
   const { id } = useParams();
   const props: Pokemon[] | undefined = useOutletContext();
-
+  
   const data = props?.find((prop) => prop?.id === Number(id));
-
+  
   //포켓몬 정보 url
   let url = `https://pokeapi.co/api/v2/pokemon/${id}`
-
-
+  
+  
   /** 함수들 */
 
+  
+  //포켓몬 url 데이터 들고오기
+  const getUrlData = useCallback(async () => {
+    const info = await fetchData(url);
+    const { abilities } = info
+
+    //특성 데이터 들고오기
+    const abilityUrl = await abilities.map(({ ability }: AbilitiesType) => fetch(ability.url));
+
+    const ability = await Promise.all(abilityUrl)
+      .then((response) => Promise.all(response.map((res) => res.json())))
+      .then((result) => result.map((r) =>
+        r.names[1].name,
+      ));
+
+    setPokeAbility(ability);
+  }, [url])
+
   //포켓몬 기본 데이터 들고오기
-  const basicInfo = useCallback(async (u: string) => {
-    const info = await fetch(u).then((res) => res.json());
+  const basicInfo = useCallback(async () => {
+    const info = await fetchData(url);
     const { height, weight } = info
 
 
@@ -45,29 +69,11 @@ export default function InfoPage() {
   }, [url]);
 
 
-  //포켓몬 url 데이터 들고오기
-  const getUrlData = useCallback(async (u: string) => {
-    const info = await fetch(u).then((res) => res.json());
-    const { abilities } = info
-
-    //특성 데이터 들고오기
-    const abilityUrl = await abilities.map(({ ability }: AbilitiesType) => fetch(ability.url));
-
-    const ability = await Promise.all(abilityUrl)
-      .then((response) => Promise.all(response.map((res) => res.json())))
-      .then((result) => result.map((r) =>
-        //const text = r.flavor_text_entries.filter((r:any)=>r.language.name === 'ko' )
-        // text :text[0].flavor_text
-        r.names[1].name,
-      ))
-
-    setPokeAbility(ability)
-  }, [url])
 
 
   useEffect(() => {
-    basicInfo(url);
-    getUrlData(url);
+    getUrlData();
+    basicInfo();
   }, [url])
 
 

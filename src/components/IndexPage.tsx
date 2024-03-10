@@ -13,13 +13,13 @@ type PropsType = {
 
 export default function IndexPage(props: PropsType) {
   const cardbox = document.querySelector('#cardbox');
-
+  
   const { pokemons, setNum } = props
-
+  
   const scrollHandle = useCallback(() => {
     if (cardbox) {
       const { scrollHeight, clientHeight, scrollTop } = cardbox
-
+      
       if (scrollHeight - clientHeight - scrollTop < 5) {
         setNum((prev) => {
           if (prev > 141) {
@@ -30,12 +30,12 @@ export default function IndexPage(props: PropsType) {
         );
       }
     }
-
+    
   }, [cardbox])
-
+  
+  
   cardbox?.addEventListener('scroll', scrollHandle);
-
-
+  
 
   return (
     <div className={style.index}>

@@ -1,9 +1,9 @@
-import { Route, Routes } from 'react-router-dom';
-import './App.css';
-import Layout from './layout/Layout';
 import './pokeTypeCss/type.css'
+import './App.css';
+import { Route, Routes } from 'react-router-dom';
 import React, { Suspense } from 'react';
 
+const Layout = React.lazy(() => import('./layout/Layout'));
 const InfoPage = React.lazy(() => import('./components/InfoPage'));
 
 function App() {
